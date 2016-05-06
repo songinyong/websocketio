@@ -11,15 +11,18 @@ platform: x64
 # specific to github and bitbucket: get a ZIP file using REST API
 shallow_clone: true
 
+init:
+- ps: Get-NodeJsLatestBuild 6.0
 
 environment:
   BITBUCKET_PASSWORD:
-    secure: ah/zb5h/z49InzWbvkFOrw==
+    secure: vqHQj3wH0DrNMmmeflA6Nw==
   matrix:
-  - nodejs_version: 0.10.40
-  - nodejs_version: 0.12.7
-  - nodejs_version: 4.2.3
-  - nodejs_version: 5.1.0
+  - nodejs_version: 0.10.44
+  - nodejs_version: 0.12.13
+  - nodejs_version: 4.4.2
+  - nodejs_version: 5.10.1
+  - nodejs_version: 6.0.0
 
 install:
 - ps: >-
@@ -30,14 +33,18 @@ install:
     node -v
 
     npm install --production --msvs_version=2013
+
+build:
+  parallel: true
+  verbosity: minimal
+
+
+after_build:
 - mkdir C:\Build\
 - 7z a -ttar C:\Build\websocketio_win_%nodejs_version%.tar C:\projects\websocketio\
 - 7z a -tgzip C:\Build\websocketio_win_%nodejs_version%.tar.gz C:\Build\websocketio_win_%nodejs_version%.tar
 - move C:\Build\websocketio_win_%nodejs_version%.tar.gz C:\projects\websocketio
-- curl -O https://bitbucket.org/tmarrinan/binary-modules/raw/master/bitbucket_upload.js
-- node bitbucket_upload.js tmarrinan %BITBUCKET_PASSWORD% tmarrinan/binary-modules websocketio_win_%nodejs_version%.tar.gz
+- curl --insecure --progress-bar --location --fail --user "renambot:%BITBUCKET_PASSWORD%" --form files=@"websocketio_win_%nodejs_version%.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/sage2/downloads/"
 - dir
-
-build: off
 
 test: off
