@@ -34,10 +34,9 @@ install:
 
     npm install --production --msvs_version=2013
 
-build: off
-
-#  parallel: true
-#  verbosity: minimal
+build:
+  parallel: true
+  verbosity: minimal
 
 
 after_build:
@@ -49,3 +48,4 @@ after_build:
 - dir
 
 test: off
+
