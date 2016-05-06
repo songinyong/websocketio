@@ -7,7 +7,7 @@ git:
 
 env:
   global:
-    - secure: "pv1clfyko3JMmlllWFSqv0oBqIGJA9eGVtizXQoY2q8t6se9FvOttSL39pydkFPcmAWuvesceQV38zyinV9Y+Yk5RhLt2T7P1C7yjL5igO5KI1VvQOnUEOCy/1IIOdTFjmCu+vl0iZlDGJdO3nGVev4IKMnqru2dWQKsH+0wqVrakFxRflfGv3jsB/UCNUmCWCzyAGMWtmNGbA9gmL0nlbGUHBlxz7ETDX7NY+iG/7WMW+SOkw4B2UgkCCyGlrb0660b/0CFyHoDZQu3xnCns0hsosvSwwaqqNkf/WgtwHbrpLkJW73euA3oy2rBrYO3YfJpWpmVtgxZASvBQodNh3jaD9iRSA1b3W0fmChk/8Ar/LU+HL7BA/M9tdRA+43s+aGLL/vHO8N/sAFIr1Bz5ipGqK0OIH4OhIl847I55CRN+CMhZ2agaAHqK2lZGX6+F4NNnQGQ7PRwTllLt1703MHGNGCAPFgm58nxlbrhMxVJsHz6YYQKvO8vzFgpU6vFblSvFefg00M3pINB1szd9rlKux5kyKwtaM0RPP2/wvQQRPwZCYd+VJIgf2f8uxAxVYQNgo4DSrRz1K8tg7UIfsOIyw0oqG2JkDxNAQd/msXvm0uUGDJHG//nj/lEFnWRmELk8+cymAb6dHARDoi1FLbVjuXXo57gxCYx2PN6Rbc="
+    - secure: "TezQcEKGz2EKuG+Q3mpQrLBLBQ2Kw+bEaUQ1dApgSyz3MVcGcsM4jAI/+3tAh1iHluuTM9og4stPz7kj89H5xBuO/u+rbiZ5xYzmpoQoaAvPvIF9aBodnIvNSxXZL6VPR3+eyNcCJwptF0HM1/IZHe5Rkk+vmeGB/RLwwK4ux3GXlug6IwM9zS1H6vZ1c4YA2gA7b/axZnN9FlgYkRur0wveLw/0U0l6LVRrvHDmBypEG02fgF0KgNCzoKphuYkRUqtditzci8LjBI93uwJHXcxWxtrnF88fY0Pa3hASmeq7nFPbNt6+5z3He/3hMs0OeWqwoJ0psIg/Z/RzRYc7qYoLqwwBELDsgJOotVdWkKXSv7p52of8dRTQJOQG+owYgHO9ShnMqL8wzJIjBrefdsq669mlPWS9SSeVymXx+mOgqgwnLNLbGx4RmMjuyLC9sGwWWo1R9QP7/J7uabjRYbGgJZdsY4IDQtNjbwYZ6jPU2iQl1Yz+KPCF5GjW8jsufxWozlcknS4d4Q90ayEqymZpCHsiFJPKrxvwmcp2/J9zL+xf8kqMbSr8YQ/OcMrpJfMEzsn4MXNeJzRuG3bTZ7SII20LWlTihDIjK6bvFKjvqaATulolrmb4ClacxE8lmR2wQKMJJSRcziEA3o0YMWmvlsJibd/CmY7ZsGm/OFo="
   matrix:
     - NODE_VERSION="0.10.40"
     - NODE_VERSION="0.12.7"
@@ -24,12 +24,11 @@ install:
   - npm install
 
 script:
-  - mkdir /Users/travis/build/tmarrinan/Build
+  - mkdir /Users/travis/build/renambot-uic/Build
   - cd ..
-  - tar --exclude ./websocketio/.git/ -czf /Users/travis/build/tmarrinan/Build/websocketio_mac_${NODE_VERSION}.tar.gz websocketio
+  - tar --exclude ./websocketio/.git/ -czf /Users/travis/build/renambot-uic/Build/websocketio_mac_${NODE_VERSION}.tar.gz websocketio
   - cd websocketio
-  - mv /Users/travis/build/tmarrinan/Build/websocketio_mac_${NODE_VERSION}.tar.gz .
-  - curl -O https://bitbucket.org/tmarrinan/binary-modules/raw/master/bitbucket_upload.js
-  - node bitbucket_upload.js tmarrinan $BITBUCKET_PASSWORD tmarrinan/binary-modules websocketio_mac_${NODE_VERSION}.tar.gz
+  - mv /Users/travis/build/renambot-uic/Build/websocketio_mac_${NODE_VERSION}.tar.gz .
+  - curl --insecure --progress-bar --location --fail --user "renambot:$BITBUCKET_PASSWORD" --form files=@"websocketio_mac_${NODE_VERSION}.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/sage2/downloads/"
   - ls -a
 
