@@ -9,10 +9,11 @@ env:
   global:
     - secure: "TezQcEKGz2EKuG+Q3mpQrLBLBQ2Kw+bEaUQ1dApgSyz3MVcGcsM4jAI/+3tAh1iHluuTM9og4stPz7kj89H5xBuO/u+rbiZ5xYzmpoQoaAvPvIF9aBodnIvNSxXZL6VPR3+eyNcCJwptF0HM1/IZHe5Rkk+vmeGB/RLwwK4ux3GXlug6IwM9zS1H6vZ1c4YA2gA7b/axZnN9FlgYkRur0wveLw/0U0l6LVRrvHDmBypEG02fgF0KgNCzoKphuYkRUqtditzci8LjBI93uwJHXcxWxtrnF88fY0Pa3hASmeq7nFPbNt6+5z3He/3hMs0OeWqwoJ0psIg/Z/RzRYc7qYoLqwwBELDsgJOotVdWkKXSv7p52of8dRTQJOQG+owYgHO9ShnMqL8wzJIjBrefdsq669mlPWS9SSeVymXx+mOgqgwnLNLbGx4RmMjuyLC9sGwWWo1R9QP7/J7uabjRYbGgJZdsY4IDQtNjbwYZ6jPU2iQl1Yz+KPCF5GjW8jsufxWozlcknS4d4Q90ayEqymZpCHsiFJPKrxvwmcp2/J9zL+xf8kqMbSr8YQ/OcMrpJfMEzsn4MXNeJzRuG3bTZ7SII20LWlTihDIjK6bvFKjvqaATulolrmb4ClacxE8lmR2wQKMJJSRcziEA3o0YMWmvlsJibd/CmY7ZsGm/OFo="
   matrix:
-    - NODE_VERSION="0.10.40"
-    - NODE_VERSION="0.12.7"
-    - NODE_VERSION="4.2.3"
-    - NODE_VERSION="5.1.0"
+    - NODE_VERSION="0.10.44"
+    - NODE_VERSION="0.12.13"
+    - NODE_VERSION="4.4.2"
+    - NODE_VERSION="5.10.1"
+    - NODE_VERSION="6.0.0"
 
 install:
   - rm -rf ~/.nvm
@@ -29,6 +30,6 @@ script:
   - tar --exclude ./websocketio/.git/ -czf /Users/travis/build/renambot-uic/Build/websocketio_mac_${NODE_VERSION}.tar.gz websocketio
   - cd websocketio
   - mv /Users/travis/build/renambot-uic/Build/websocketio_mac_${NODE_VERSION}.tar.gz .
-  - curl --insecure --progress-bar --location --fail --user "renambot:$BITBUCKET_PASSWORD" --form files=@"websocketio_mac_${NODE_VERSION}.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/sage2/downloads/"
+  - curl --insecure --progress-bar --location --fail --user "renambot:$BITBUCKET_PASSWORD" --form files=@"websocketio_mac_${NODE_VERSION}.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/binaries/downloads/"
   - ls -a
 

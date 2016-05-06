@@ -44,7 +44,7 @@ after_build:
 - 7z a -ttar C:\Build\websocketio_win_%nodejs_version%.tar C:\projects\websocketio\
 - 7z a -tgzip C:\Build\websocketio_win_%nodejs_version%.tar.gz C:\Build\websocketio_win_%nodejs_version%.tar
 - move C:\Build\websocketio_win_%nodejs_version%.tar.gz C:\projects\websocketio
-- curl --insecure --progress-bar --location --fail --user "renambot:%BITBUCKET_PASSWORD%" --form files=@"websocketio_win_%nodejs_version%.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/sage2/downloads/"
+- curl --insecure --progress-bar --location --fail --user "renambot:%BITBUCKET_PASSWORD%" --form files=@"websocketio_win_%nodejs_version%.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/binaries/downloads/"
 - dir
 
 test: off
