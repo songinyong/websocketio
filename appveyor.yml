@@ -30,8 +30,6 @@ install:
   - node -v
 
 build:
-  parallel: true
-  verbosity: minimal
   - npm install --production --msvs_version=2013
 
 
