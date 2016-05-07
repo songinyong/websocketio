@@ -28,11 +28,11 @@ install:
   - ps: Install-Product node $env:nodejs_version x64
   - npm -v
   - node -v
-  - npm install --production --msvs_version=2013
 
 build:
   parallel: true
   verbosity: minimal
+  - npm install --production --msvs_version=2013
 
 
 after_build:
