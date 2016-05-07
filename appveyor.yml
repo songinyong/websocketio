@@ -25,14 +25,10 @@ environment:
   - nodejs_version: 6.0.0
 
 install:
-- ps: >-
-    Install-Product node $env:nodejs_version x64
-
-    npm -v
-
-    node -v
-
-    npm install --production --msvs_version=2013
+  - ps: Install-Product node $env:nodejs_version x64
+  - npm -v
+  - node -v
+  - npm install --production --msvs_version=2013
 
 build:
   parallel: true
@@ -40,12 +36,12 @@ build:
 
 
 after_build:
-- mkdir C:\Build\
-- 7z a -ttar C:\Build\websocketio_win_%nodejs_version%.tar C:\projects\websocketio\
-- 7z a -tgzip C:\Build\websocketio_win_%nodejs_version%.tar.gz C:\Build\websocketio_win_%nodejs_version%.tar
-- move C:\Build\websocketio_win_%nodejs_version%.tar.gz C:\projects\websocketio
-- curl --insecure --progress-bar --location --fail --user "renambot:%BITBUCKET_PASSWORD%" --form files=@"websocketio_win_%nodejs_version%.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/binaries/downloads/"
-- dir
-
+  - mkdir C:\Build\
+  - 7z a -ttar C:\Build\websocketio_win_%nodejs_version%.tar C:\projects\websocketio\
+  - 7z a -tgzip C:\Build\websocketio_win_%nodejs_version%.tar.gz C:\Build\websocketio_win_%nodejs_version%.tar
+  - move C:\Build\websocketio_win_%nodejs_version%.tar.gz C:\projects\websocketio
+  - curl --insecure --progress-bar --location --fail --user "renambot:%BITBUCKET_PASSWORD%" --form files=@"websocketio_win_%nodejs_version%.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/binaries/downloads/"
+  - dir
+ 
 test: off
 
