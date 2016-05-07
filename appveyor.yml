@@ -28,14 +28,13 @@ install:
   - ps: Install-Product node $env:nodejs_version x64
   - npm install --production --msvs_version=2013
  
+build: off
+
 test_script:
   - npm -v
   - node -v
 
-build: off
-
-
-after_build:
+after_test:
   - mkdir C:\Build\
   - 7z a -ttar C:\Build\websocketio_win_%nodejs_version%.tar C:\projects\websocketio\
   - 7z a -tgzip C:\Build\websocketio_win_%nodejs_version%.tar.gz C:\Build\websocketio_win_%nodejs_version%.tar
@@ -43,5 +42,4 @@ after_build:
   - curl --insecure --progress-bar --location --fail --user "renambot:%BITBUCKET_PASSWORD%" --form files=@"websocketio_win_%nodejs_version%.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/binaries/downloads/"
   - dir
  
-test: off
 
