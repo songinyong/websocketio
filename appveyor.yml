@@ -26,11 +26,13 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
+  - npm install --production --msvs_version=2013
+ 
+test_script:
   - npm -v
   - node -v
 
-build:
-  - npm install --production --msvs_version=2013
+build: off
 
 
 after_build:
