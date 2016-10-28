@@ -1,37 +1,33 @@
 os: osx
-
 language: objective-c
-
 git:
   depth: 1
-
 env:
   global:
-    - secure: "S9+Eqi4RmwWMEKQmzwu3z3CT2XR0RMouxlEBz3rZ5u1OzTDhdqiBaLMbzWP6Mw29HT9W4nbWiWMYngSxPfPO3psatt4GWCToz37D9Z8DQMZ5PRwJFv2KUuwadzJA0RI77RSAiRL/dnzNkE9NRRK/adnIEyKZSruDBjYMKrNFf2TKOJTjwaFt+dkBUlFoXNS9WsjjkJGWD64B7z9/IgPuIdZlbhG0kzrTr+daE37yy+hgwQcLooqEy9rbrM45zdsBDfWjgXLXDdxHZ3fEaWtOVcFp+ywK9tRM362i8P2bRHSuX8whvNe/hdh370ShnOc4jyaktJZcswLJKPLFjVnnd66UZEi6PNzuZmthZTzx9r18ZPQ1f7BLs6CYg8yQhs9TIf9yz2BkiexSpAY7xmWyA/rmmbvaPZOi5i/Nso7b9XftqobcJzNa0yhXQ321uupvU9xBdcQYsGiFyiLxMgSrhAc0qXW6Gr1bM1BWzLBcGcAe+rQxei2wwrqRNpNAF40FLiatDpUB1L8WCKO93sxSNiZI1VqwqWSCh7VVcVQbKZ6X7/oYfS265LBEsGIrYtIJYXaMU2V5Y23MDoP8pyEFUpNTMvunIPOnoBAwE+zSmITTBornpFHArVNxXVi0hk+FXlw+nSNfA7R0TDsR7CpoTRkoOVkI9ECxiqjV9qd4tZQ="
+  - secure: TeP+dLu0RvOaY8eD/hrpynRugrSNtmWcsoSTy0on3DezQRLuVgEBIuDh2aJfog2R6XAuV3ud5+9j4D6zC+iZEp++VhcKZLvOOKTOU5tUYtvz7nB6qEfBHqbGQeMiteUxNyCZ5L79EzErS7Jw5AMRR4OcRe1pKf4ctRjUJ/pq9D1yJEinZ76NU5uo0UXQogtxYgL/mFzpnmyRCCCuhukc3BbUIp6ejUxb+4+IuTNUeDN0upEQscG2JZaMrlSegKR8sOIZbhBFRE2EDPWcNWOQ4I6Vo3l6oXzqabtzUw5D3kJRfkmJQAmmvflYFUWbKcdHaDljEvDuRgwvc1cswyp6ciiA1X8v9WUGkL4XNuEHCTCUmc55MX2PH+NuGJJTF8z05BKZ8vrvMT30a/5tbIjSQ69ytG6SAtl8LBZxoFmx9hyZUUOH1tmzde+f+Eg+7zz7VlWtLODudOf7yXBP22K1uWJrGOOVww2EG1CPOJUc6L3Ro7Je/AHVSeNAQDGQdkUo/EYx8njfEixDei8ib+5t73mloCKaYk3WmFAW8s+oox9J6/Rv1ZrySuKjENd3j+ygxi7hq/qXX6BKEkVhmIKZZqZZ51EL78XnhGzpJjcgTVcTqSjXZzvXdlw2W+GvBRYrySLitlN02ZvWTlegjhbfSHY4in/fppROquZSgHxLoy0=
   matrix:
-    - NODE_VERSION="0.10.44"
-    - NODE_VERSION="0.12.13"
-    - NODE_VERSION="4.4.2"
-    - NODE_VERSION="5.10.1"
-    - NODE_VERSION="6.0.0"
-    - NODE_VERSION="7.0.0"
-
+  - NODE_VERSION="0.10.44"
+  - NODE_VERSION="0.12.13"
+  - NODE_VERSION="4.4.2"
+  - NODE_VERSION="5.10.1"
+  - NODE_VERSION="6.0.0"
+  - NODE_VERSION="7.0.0"
 install:
-  - rm -rf ~/.nvm
-  - git clone https://github.com/creationix/nvm.git ~/.nvm
-  - source ~/.nvm/nvm.sh
-  - nvm install $NODE_VERSION
-  - node -v
-  - npm -v
-  - npm install
-
+- rm -rf ~/.nvm
+- git clone https://github.com/creationix/nvm.git ~/.nvm
+- source ~/.nvm/nvm.sh
+- nvm install $NODE_VERSION
+- node -v
+- npm -v
+- npm install
 script:
-  - pwd
-  - mkdir /Users/travis/build/renambot-uic/Build
-  - cd ..
-  - rm -fr ./websocketio/.git ./websocketio/.gitmodules
-  - tar -czf /Users/travis/build/renambot-uic/Build/websocketio_mac_${NODE_VERSION}.tar.gz websocketio
-  - cd Build
-  - curl --insecure --progress-bar --location --fail --user "renambot:$BITBUCKET_PASSWORD" --form files=@"websocketio_mac_${NODE_VERSION}.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/binaries/downloads/"
-  - ls -la
-
+- pwd
+- mkdir /Users/travis/build/renambot-uic/Build
+- cd ..
+- rm -fr ./websocketio/.git ./websocketio/.gitmodules
+- tar -czf /Users/travis/build/renambot-uic/Build/websocketio_mac_${NODE_VERSION}.tar.gz
+  websocketio
+- cd Build
+- curl --insecure --progress-bar --location --fail --user "renambot:$BITBUCKET_PASSWORD"
+  --form files=@"websocketio_mac_${NODE_VERSION}.tar.gz" "https://api.bitbucket.org/2.0/repositories/sage2/binaries/downloads/"
+- ls -la
