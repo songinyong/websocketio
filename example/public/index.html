@@ -22,6 +22,11 @@ function init() {
 }
 
 function setupListeners() {
+	wsio.on('close', function(data) {
+		console.log('bytes read',  wsio.bytesRead);
+		console.log('bytes write', wsio.bytesWritten);
+	});
+
 	wsio.on('stringMessage', function(data) {
 		console.log(data);
 	});

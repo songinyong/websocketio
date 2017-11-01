@@ -36,8 +36,9 @@ function openWebSocketClient(wsio) {
 }
 
 function closeWebSocketClient(wsio) {
-	console.log('END Bytesread', wsio.bytesRead);
+	console.log('END Bytesread',    wsio.bytesRead);
 	console.log('END Byteswritten', wsio.bytesWritten);
+
 	console.log("Client disconnect: "+ wsio.id);
 }
 

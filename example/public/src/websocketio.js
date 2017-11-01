@@ -9,6 +9,22 @@ function WebSocketIO(url) {
 	this.remoteListeners = {"#WSIO#addListener": "0000"};
 	this.localListeners = {"0000": "#WSIO#addListener"};
 
+	this._bytesWritten = 0;
+	this._bytesRead    = 0;
+
+	// getter for the bytesRead property
+	Object.defineProperty(this, "bytesRead", {
+		get: function () {
+			return this._bytesRead;
+		}
+	});
+	// getter for the bytesWritten property
+	Object.defineProperty(this, "bytesWritten", {
+		get: function () {
+			return this._bytesWritten;
+		}
+	});
+
 	this.open = function(callback) {
 		var _this = this;
 
@@ -22,6 +38,7 @@ function WebSocketIO(url) {
 			var fName;
 			// text message
 			if (typeof message.data === "string") {
+				_this._bytesRead += message.data.length;
 				var msg = JSON.parse(message.data);
 				fName = _this.localListeners[msg.f];
 				//console.log("WebsocketIO> received " + msg.f + "(" + fName + ")");
@@ -45,6 +62,7 @@ function WebSocketIO(url) {
 				}
 			}
 			else {
+				_this._bytesRead += message.data.byteLength;
 				var uInt8 = new Uint8Array(message.data);
 				var func  = String.fromCharCode(uInt8[0]) +
 							String.fromCharCode(uInt8[1]) +
@@ -68,7 +86,9 @@ function WebSocketIO(url) {
 		this.localListeners[alias] = name;
 		this.messages[name] = callback;
 		this.aliasCount++;
-		if(name === "close") return;
+		if (name === "close") {
+			return;
+		}
 		this.emit('#WSIO#addListener', {listener: name, alias: alias});
 	};
 
@@ -100,11 +120,13 @@ function WebSocketIO(url) {
 				message.set(data, 4);
 				// send the message using websocket
 				this.ws.send(message.buffer);
+				this._bytesWritten += message.buffer.byteLength;
 			}
 			// send data as JSON string
 			else {
-				message = {f: alias, d: data};
-				this.ws.send(JSON.stringify(message));
+				message = JSON.stringify({f: alias, d: data});
+				this.ws.send(message);
+				this._bytesWritten += message.length;
 			}
 		}
 		else {
