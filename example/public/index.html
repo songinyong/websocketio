@@ -6,6 +6,7 @@
 <script type="text/javascript" src="src/websocketio.js"></script>
 <script type="text/javascript">
 var wsio;
+
 function init() {
 	wsio = new WebSocketIO();
 	wsio.open(function() {
@@ -19,6 +20,7 @@ function init() {
 		wsio.emit('requestBinaryMessage', bin);
 	});
 }
+
 function setupListeners() {
 	wsio.on('stringMessage', function(data) {
 		console.log(data);
@@ -28,6 +30,7 @@ function setupListeners() {
 		console.log(data);
 	});
 }
+
 </script>
 </head>
 
