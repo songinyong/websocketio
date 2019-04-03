@@ -6,12 +6,8 @@ env:
   global:
   - secure: TeP+dLu0RvOaY8eD/hrpynRugrSNtmWcsoSTy0on3DezQRLuVgEBIuDh2aJfog2R6XAuV3ud5+9j4D6zC+iZEp++VhcKZLvOOKTOU5tUYtvz7nB6qEfBHqbGQeMiteUxNyCZ5L79EzErS7Jw5AMRR4OcRe1pKf4ctRjUJ/pq9D1yJEinZ76NU5uo0UXQogtxYgL/mFzpnmyRCCCuhukc3BbUIp6ejUxb+4+IuTNUeDN0upEQscG2JZaMrlSegKR8sOIZbhBFRE2EDPWcNWOQ4I6Vo3l6oXzqabtzUw5D3kJRfkmJQAmmvflYFUWbKcdHaDljEvDuRgwvc1cswyp6ciiA1X8v9WUGkL4XNuEHCTCUmc55MX2PH+NuGJJTF8z05BKZ8vrvMT30a/5tbIjSQ69ytG6SAtl8LBZxoFmx9hyZUUOH1tmzde+f+Eg+7zz7VlWtLODudOf7yXBP22K1uWJrGOOVww2EG1CPOJUc6L3Ro7Je/AHVSeNAQDGQdkUo/EYx8njfEixDei8ib+5t73mloCKaYk3WmFAW8s+oox9J6/Rv1ZrySuKjENd3j+ygxi7hq/qXX6BKEkVhmIKZZqZZ51EL78XnhGzpJjcgTVcTqSjXZzvXdlw2W+GvBRYrySLitlN02ZvWTlegjhbfSHY4in/fppROquZSgHxLoy0=
   matrix:
-  - NODE_VERSION="0.10.44"
-  - NODE_VERSION="0.12.13"
-  - NODE_VERSION="4.4.2"
-  - NODE_VERSION="5.10.1"
-  - NODE_VERSION="6.0.0"
-  - NODE_VERSION="7.0.0"
+  - NODE_VERSION="10.15.3"
+  - NODE_VERSION="11.13.0"
 install:
 - rm -rf ~/.nvm
 - git clone https://github.com/creationix/nvm.git ~/.nvm
