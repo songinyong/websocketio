@@ -198,7 +198,7 @@ WebSocketIO.prototype.emit = function(name, data, attempts) {
 				// double error handling
 				try {
 					this._bytesWritten += message.byteLength;
-					this.ws.send(message, {binary: true, mask: true}, function(err){
+					this.ws.send(message, {binary: true, mask: false}, function(err){
 						if (_this.logLevel != "quiet")
 							if (err) {
 								console.log("WebsocketIO>\t---ERROR (ws.send)---", name);
@@ -218,7 +218,7 @@ WebSocketIO.prototype.emit = function(name, data, attempts) {
 				try {
 					var msgString = JSON.stringify(message);
 					this._bytesWritten += msgString.length;
-					this.ws.send(msgString, {binary: false, mask: true}, function(err){
+					this.ws.send(msgString, {binary: false, mask: false}, function(err){
 						if (_this.logLevel != "quiet")
 							if (err) {
 								console.log("WebsocketIO>\t---ERROR (ws.send)---", name);
@@ -278,7 +278,7 @@ WebSocketIO.prototype.emitString = function(name, dataString, attempts) {
 			alias = this.remoteListeners[name];
 			message = "{\"f\":\"" + alias + "\",\"d\":" + dataString + "}";
 			this._bytesWritten += message.length;
-			this.ws.send(message, {binary: false, mask: true});
+			this.ws.send(message, {binary: false, mask: false});
 		}
 		else {
 			if (!this.outbound.hasOwnProperty(name)) {
