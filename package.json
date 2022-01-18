@@ -8,7 +8,7 @@
     "url": "git://github.com/tmarrinan/websocketio.git"
   },
   "dependencies": {
-    "ws": "latest",
+    "ws": "^4",
     "bufferutil": "latest",
     "utf-8-validate": "latest"
   },
